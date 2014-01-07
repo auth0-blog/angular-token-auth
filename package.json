@@ -1,0 +1,9 @@
+{
+  "name": "angular-token-auth",
+  "version": "0.0.1",
+  "dependencies": {
+    "express":      "~3.4.7",
+    "express-jwt":  "~0.1.0",
+    "jsonwebtoken": "~0.1.0"
+  }
+}
