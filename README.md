@@ -19,7 +19,9 @@ node auth.server.js
 and go to [localhost:8080](http://localhost:8080).
  
  
-For a complete example handling social providers, enterprise authentication with LDAP/AD, and user/password, check out [Auth0 Angular integration](https://github.com/auth0/auth0-angular).
+### More advanced scenarios?
+
+For a complete example handling social providers, enterprise authentication with LDAP/Active Directoty, and user/password, check out [Auth0 Angular integration](https://github.com/auth0/auth0-angular).
 
 ---
  
