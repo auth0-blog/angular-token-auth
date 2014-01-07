@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Angular Authentication</title>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js"></script>
+    <script src="./auth.client.js"></script>
+  </head>
+  <body ng-app="myApp">
+    <div ng-controller="UserCtrl">
+      <span>{{message}}</span>
+      <form ng-submit="submit()">
+        <input ng-model="user.username" type="text" name="user" placeholder="Username" />
+        <input ng-model="user.password" type="password" name="pass" placeholder="Password" />
+        <input type="submit" value="Login" />
+      </form>
+    </div>
+    <div ng-controller="RestrictedCtrl">
+      <a ng-click="callRestricted()" href="">Shh, this is private!</a>
+      <div>{{message}}</div>
+    </div>
+  </body>
+</html>
