@@ -1,36 +1,67 @@
 var myApp = angular.module('myApp', []);
 
+//this is used to parse the profile
+function url_base64_decode(str) {
+  var output = str.replace('-', '+').replace('_', '/');
+  switch (output.length % 4) {
+    case 0:
+      break;
+    case 2:
+      output += '==';
+      break;
+    case 3:
+      output += '=';
+      break;
+    default:
+      throw 'Illegal base64url string!';
+  }
+  return window.atob(output); //polifyll https://github.com/davidchambers/Base64.js
+}
+
 myApp.controller('UserCtrl', function ($scope, $http, $window) {
   $scope.user = {username: 'john.doe', password: 'foobar'};
+  $scope.isAuthenticated = false;
+  $scope.welcome = '';
   $scope.message = '';
+
   $scope.submit = function () {
     $http
       .post('/authenticate', $scope.user)
       .success(function (data, status, headers, config) {
         $window.sessionStorage.token = data.token;
-        $scope.message = 'Welcome';
+        $scope.isAuthenticated = true;
+        var encodedProfile = data.token.split('.')[1];
+        var profile = JSON.parse(url_base64_decode(encodedProfile));
+        $scope.welcome = 'Welcome ' + profile.first_name + ' ' + profile.last_name;
       })
       .error(function (data, status, headers, config) {
         // Erase the token if the user fails to log in
         delete $window.sessionStorage.token;
+        $scope.isAuthenticated = false;
 
         // Handle login errors here
-        $scope.message = 'Error: Invalid user or password';
+        $scope.error = 'Error: Invalid user or password';
+        $scope.welcome = '';
       });
   };
-});
 
-myApp.controller('RestrictedCtrl', function ($scope, $http) {
-  $scope.message = '';
+  $scope.logout = function () {
+    $scope.welcome = '';
+    $scope.message = '';
+    $scope.isAuthenticated = false;
+    delete $window.sessionStorage.token;
+  };
+
   $scope.callRestricted = function () {
     $http({url: '/api/restricted', method: 'GET'})
     .success(function (data, status, headers, config) {
-      $scope.message = data.name; // Should log 'foo'
+      $scope.message = $scope.message + ' ' + data.name; // Should log 'foo'
     })
     .error(function (data, status, headers, config) {
-      $scope.message = data;
+      alert(data);
     });
   };
+
 });
 
 myApp.factory('authInterceptor', function ($rootScope, $q, $window) {
