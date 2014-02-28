@@ -73,11 +73,11 @@ myApp.factory('authInterceptor', function ($rootScope, $q, $window) {
       }
       return config;
     },
-    response: function (response) {
-      if (response.status === 401) {
+    responseError: function (rejection) {
+      if (rejection.status === 401) {
         // handle the case where the user is not authenticated
       }
-      return response || $q.when(response);
+      return $q.reject(rejection);
     }
   };
 });
