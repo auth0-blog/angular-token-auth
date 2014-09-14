@@ -1,6 +1,9 @@
 var express = require('express');
+var bodyParser = require('body-parser');
+
 var jwt = require('jsonwebtoken');  //https://npmjs.org/package/node-jsonwebtoken
 var expressJwt = require('express-jwt'); //https://npmjs.org/package/express-jwt
+
 
 var secret = 'this is the secret secret secret 12356';
 
@@ -9,8 +12,7 @@ var app = express();
 // We are going to protect /api routes with JWT
 app.use('/api', expressJwt({secret: secret}));
 
-app.use(express.json());
-app.use(express.urlencoded());
+app.use(bodyParser.json());
 app.use('/', express.static(__dirname + '/'));
 
 app.use(function(err, req, res, next){
