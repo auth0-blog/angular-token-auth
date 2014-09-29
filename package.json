@@ -2,8 +2,31 @@
   "name": "angular-token-auth",
   "version": "0.0.1",
   "dependencies": {
-    "express":      "~4.9.0",
-    "express-jwt":  "~0.2.1",
+    "body-parser": "^1.9.0",
+    "express": "~4.9.0",
+    "express-jwt": "~0.2.1",
     "jsonwebtoken": "~0.4.0"
-  }
+  },
+  "description": "Example of Token-based authentication in [AngularJS](http://angularjs.org) with [Express](http://expressjs.com).",
+  "main": "auth.server.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/auth0/angular-token-auth.git"
+  },
+  "keywords": [
+    "angular",
+    "auth",
+    "jwt",
+    "express"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/auth0/angular-token-auth/issues"
+  },
+  "homepage": "https://github.com/auth0/angular-token-auth"
 }

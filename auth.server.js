@@ -17,7 +17,7 @@ app.use('/', express.static(__dirname + '/'));
 
 app.use(function(err, req, res, next){
   if (err.constructor.name === 'UnauthorizedError') {
-    res.send(401, 'Unauthorized');
+    res.status(401).send('Unauthorized');
   }
 });
 
@@ -25,7 +25,7 @@ app.post('/authenticate', function (req, res) {
   //TODO validate req.body.username and req.body.password
   //if is invalid, return 401
   if (!(req.body.username === 'john.doe' && req.body.password === 'foobar')) {
-    res.send(401, 'Wrong user or password');
+    res.status(401).send('Wrong user or password');
     return;
   }
 
