@@ -32,6 +32,7 @@ myApp.controller('UserCtrl', function ($scope, $http, $window) {
         $scope.isAuthenticated = true;
         var encodedProfile = data.token.split('.')[1];
         var profile = JSON.parse(url_base64_decode(encodedProfile));
+        $scope.error = '';
         $scope.welcome = 'Welcome ' + profile.first_name + ' ' + profile.last_name;
       })
       .error(function (data, status, headers, config) {
